@@ -1,12 +1,11 @@
-console.log(window.innerWidth)
-
-new Splide( '.splide', {
+new Splide( '#splide', {
     type: "loop",
-    perPage: 30,
+    perPage: 3,
     rewind : true,
     perMove: 3,
     autoWidth: true
 } ).mount();
+
 
 const getProducts = async () => {
     const response = await fetch("./components.json")
@@ -26,16 +25,35 @@ const showData = (data) => {
             <li id=${index} class="splide__slide">
 
                 <div class="other-details">
-                    <span class="discount">
-                        ${
-                            (product.oldPrice ? "-"+Math.round( (product.oldPrice-product.price) / product.oldPrice * 100 )+ "%" : "")
-                        }
-                    </span>
-                    <span class="like-number">
-                        ${
-                            (product.params.likeCount ? `<img id="heart-image" src="./heart.svg" /> ` +product.params.likeCount : "")
-                        }
-                    </span>
+
+
+                    ${product.oldPrice ? 
+                    
+                        `<span class=discount> - ${Math.round( (product.oldPrice-product.price) / product.oldPrice * 100)}% </span> `
+
+                        :
+
+                        ""
+                    
+                    }
+
+
+                    ${product.params.likeCount ? 
+                        `<span class=like-number>  <img id=heart-image src=./heart.svg />  ${product.params.likeCount} </span>`
+
+                        :
+
+                        ""
+                    }
+
+
+                    ${product.params.isNew ? 
+                        
+                        "<span class=isNew> NEU </span>"
+                        :
+
+                        ""
+                    }
                 </div>
 
                 <img src=${product.image} alt="">
@@ -70,6 +88,7 @@ const showData = (data) => {
     productEl.forEach(product => slideList.innerHTML += product);
 
 }
+
 
 getProducts();
 
