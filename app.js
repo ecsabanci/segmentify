@@ -72,8 +72,8 @@ const showData = (data) => {
 
                 <div class="prices">
                     <div class="main-prices">
-                        <h4 class="price"> ${product.price} £ * </h4>
-                        <h4 class="old-price"> ${(product.oldPrice ? product.oldPrice+" £ *" : "")} </h4>
+                        <h4 class="price"> ${product.priceText.slice(1)} ${product.priceText[0]} * </h4>
+                        <h4 class="old-price"> ${(product.oldPriceText ? product.oldPriceText.slice(1) + " " + product.oldPriceText[0] +" *": "")} </h4>
                     </div>
                     <div class="base-price"> ${product.params.basePrice} </div>
                 </div>
